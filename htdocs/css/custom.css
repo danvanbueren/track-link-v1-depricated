@@ -1,0 +1,86 @@
+.customlogout {
+  color: #777777;
+}
+.customlogout:hover {
+  color: #337AB7;
+}
+
+.customtiles {
+  color: #ffffff;
+  text-shadow: 0 0 2px grey;
+}
+.customtiles:hover {
+  color: #ffffff;
+  text-shadow: 0 0 6px grey;
+}
+
+.glow {
+  text-shadow: 0 0 3px lightgrey;
+}
+.glow:hover {
+  text-shadow: 0 0 6px lightgrey;
+}
+
+.x-card-img {
+	opacity:0.8;
+	filter: blur(3px);
+	-webkit-filter: blur(3px);
+	max-height: 250px;
+	min-height: 250px;
+}
+
+.x-card-img:hover {
+	opacity:0.2;
+}
+
+.x-card-img-lg {
+	opacity:0.5;
+	filter: blur(10px);
+	-webkit-filter: blur(10px);
+	max-height: 200px;
+	min-height: 200px;
+}
+
+.card-constrain {
+	max-height: 250px;
+	min-height: 250px;
+	margin-bottom: 25px;
+}
+
+.card-constrain-lg {
+	max-height: 200px;
+	min-height: 200px;
+	margin-bottom: 25px;
+}
+
+.card-img-showcase {
+	object-fit: cover;
+	width:170px;
+  	height:170px;
+  	padding:10px;
+  	text-shadow: 0 0 6px black;
+}
+
+.card-audio-player {
+	position: absolute;
+	bottom: 0;
+	padding-bottom: 10px;
+}
+
+.projectmid {
+	 max-width: 100%;
+	 margin-bottom: 15px;
+}
+
+/** MATERIAL ICONS **/
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
