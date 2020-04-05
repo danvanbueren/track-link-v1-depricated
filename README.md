@@ -21,9 +21,10 @@ A data-sharing tool to help musicians collaborate with each other.
 Perform these steps, and it should be working!
 ##
 
+<details>
+
 #### Build Tools:
 
-<details>
 <summary>Expand</summary>
 
 Here's a list of the external tools I used when developing this project.
@@ -38,9 +39,10 @@ Here's a list of the external tools I used when developing this project.
 
 </details>
 
+<details>
+
 #### Update `php.ini`
 
-<details>
 <summary>Expand</summary>
 
 - Your php.ini will likely need to be updated to allow for larger file uploads, I recommend these values:
@@ -59,9 +61,10 @@ upload_max_filesize = 256M
 
 </details>
 
+<details>
+
 #### Build MySQL Database
 
-<details>
 <summary>Expand</summary>
 
 - Update username & password for MySQL server & in `includes/dbh.inc.php`.
@@ -128,9 +131,10 @@ ALTER TABLE `users`
 
 </details>
 
+<details>
+
 #### Update `users` Table
 
-<details>
 <summary>Expand</summary>
 
 - Either delete the original rows or modify them to your own accord
