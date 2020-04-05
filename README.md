@@ -12,10 +12,10 @@ A data-sharing tool to help musicians collaborate with each other.
 ## Installation
 
 1. Place all files and folders from `htdocs` in your own active directory.
-2. Ensure your servers/services will support this specific project - [see below](#a).
-3. Update php.ini - [see below](b).
-4. Set up MySQL tables - [see below](c).
-5. Update `users` table with new login information - [see below](d).
+2. Ensure your servers/services will support this specific project - [see below](#build-tools).
+3. Update php.ini - [see below](#update-phpini).
+4. Set up MySQL tables - [see below](#build-mysql-database).
+5. Update `users` table with new login information - [see below](#update-users-table).
 
 ###
 Perform these steps, and it should be working!
