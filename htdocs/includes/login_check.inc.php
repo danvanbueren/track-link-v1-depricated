@@ -11,7 +11,6 @@ if(isset($_POST['Submit'])){
 			$hash = $row['hash'];
 			$role = $row['role'];
 			if (($_POST['Username'] == $name) && (password_verify($_POST['Password'], $hash))) {
-				echo $_POST['Username']." // ".$name." // ".$_POST['Password']." // ".$hash." // ";
 				$matchFound = true;
 				$_SESSION['uuid'] = $uuid;
 				$_SESSION['name'] = $name;
