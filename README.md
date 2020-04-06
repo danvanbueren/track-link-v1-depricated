@@ -142,7 +142,7 @@ ALTER TABLE `users`
 	- If creating new rows, `uuid` is set to Auto-Increment - no need to enter a value
 	- `name` will be whatever you want the user's username to be
 	- `hash` will be the hashed version of the user's password
-		- I included my easy hashing tool with the rest of the project in `includes/tools/hash_gen.php`. You'll have to include it manually if you want to use it, or create your own HTML that includes it.
+		- You can use my easy hashing tool from its repo at [/php-hash-gen](https://github.com/danvanbueren/php-hash-gen)
 	- `role` will either `user` or `admin`
 		- As of now, the only difference is the ability to delete a project. Admins will have more access soon.
 
