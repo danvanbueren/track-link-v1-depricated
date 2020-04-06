@@ -16,6 +16,7 @@ A data-sharing tool to help musicians collaborate with each other.
 3. Update php.ini - [see below](#update-phpini).
 4. Set up MySQL tables - [see below](#build-mysql-database).
 5. Update `users` table with new login information - [see below](#update-users-table).
+6. Update `settings.config` in root directory with applicable information - [see below](#update-settingsconfig).
 
 ###
 Perform these steps, and it should be working!
@@ -146,3 +147,37 @@ ALTER TABLE `users`
 		- As of now, the only difference is the ability to delete a project. Admins will have more access soon.
 
 </details>
+
+#### Update `settings.config`
+
+<details>
+
+<summary>Expand</summary>
+
+By default, the settings configuration will be incomplete and will prevent your instance from connecting to your database correctly. Your band/group name will also be an eyesore if left unchanged and should serve as a reminder in the event you do not see this step.
+- Below is the default `settings.config`:
+```json
+{
+  "group-name":"--> UPDATE 'SETTINGS.CONFIG' <--",
+  "sql-server-name":"localhost",
+  "sql-username":"--> UPDATE ME <--",
+  "sql-password":"--> UPDATE ME <--",
+  "sql-database":"tracklink"
+} 
+```
+- Change the value of `group-name` to your band/group name
+  - i.e. `"group-name":"Queen",`
+- Change the value of `sql-server-name` to the path to your MySQL server (if applicable)
+  - If you are hosting your MySQL server on the same system as your webserver, leaving the value `localhost` will generally work. You should only change this if you are hosting your MySQL server on a different system
+    - i.e. `"sql-server-name":"192.168.0.27",`
+- Change the value of `sql-username` to your MySQL username
+  - i.e. `"sql-username":"root",`
+- Change the value of `sql-password` to your MySQL password
+  - i.e. `"sql-password":"c&aA1$%Cx8y5@7iR",`
+- Change the value of `sql-database` to your MySQL database name (if applicable)
+  - The default value `tracklink` is already correct if you have been following this installation guide. Only change this if you decide to name your database something else.
+    - i.e. `"sql-database":"queen-tracklink-db"`
+  - Warning: Changing anything EXCEPT for the database name will break this program in it's default state. Even if you decide to use a different name for your database, all other SQL must mirror the previously mentioned format or you will run into a multitude of errors. Changing anything EXCEPT for the database name would require you to go through the whole program and edit all SQL queries - yikes!
+
+</details>
+
