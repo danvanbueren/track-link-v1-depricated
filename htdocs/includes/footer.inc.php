@@ -1,5 +1,9 @@
+<?php
+require_once 'includes/functions.inc.php';
+?>
+
     <footer class="footer">
-      <h6 style="float: right;">b20.4_1 <b>(ALPHA)</b></h6>
+      <h6 style="float: right;"><?php echo getBuildInfo('ref').' <b>('.strtoupper(getBuildInfo('type')).')</b>'; ?></h6>
       <p>&copy; TrackLink 2020</p>
       <h6>built by <a href="https://github.com/danvanbueren">@danvanbueren</a></h6>
       <?php

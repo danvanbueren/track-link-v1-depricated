@@ -1,7 +1,8 @@
 <?php
 	ob_start();
 	session_start();
-	include_once 'includes/dbh.inc.php';
+	require_once 'includes/dbh.inc.php';
+	require_once 'includes/functions.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="css/sticky-footer.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
-	<title>Sign in</title>
+	<title>TrackLink - Login</title>
 </head>
 <body>
 
@@ -23,8 +24,8 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<center>
-				<h4>TrackLink [Alpha]</h4>
-				<h6>Littleton Artist Portal</h6>
+				<h4>TrackLink</h4>
+				<h6><?php echo getUserConfig('group-name'); ?> Artist Portal</h6>
 			</center>
 		</div>
 	</nav>

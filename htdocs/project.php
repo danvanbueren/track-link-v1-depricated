@@ -53,7 +53,7 @@ $resultAllProjectsCheck = mysqli_num_rows($resultAllProjects);
 					<li role="presentation"><a class="customlogout" href="logout.php" role="button"><i class="material-icons md-18">exit_to_app</i> Logout</a></li>
 				</ul>
 			</nav>
-			<h3 class="text-muted">Littleton Artist Portal</h3>
+			<h3 class="text-muted"><?php echo getUserConfig('group-name'); ?> Artist Portal</h3>
 		</div>
 <div class="card bg-dark text-white card-constrain-lg">
 	<img class="card-img x-card-img-lg" src="<?php echo $art ?>" alt="Background">

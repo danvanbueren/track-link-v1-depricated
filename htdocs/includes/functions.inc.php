@@ -1,5 +1,66 @@
 <?php
 
+
+function getUserConfig($param) {
+
+	$file = file_get_contents('settings.config');
+
+	$someArray = json_decode($file);
+	  foreach ($someArray as $key => $value) {
+	  	switch($param) {
+	  		case 'group-name':
+	  			if($key == $param)
+	  				return $value;
+	  			break;
+	  		case 'sql-server-name':
+	  			if($key == $param)
+	  				return $value;
+	  			break;
+	  		case 'sql-username':
+	  			if($key == $param)
+	  				return $value;
+	  			break;
+	  		case 'sql-password':
+	  			if($key == $param)
+	  				return $value;
+	  			break;
+	  		case 'sql-database':
+	  			if($key == $param)
+	  				return $value;
+	  			break;
+	  		default:
+	  			return false;
+	  			break;
+	  	}
+  }
+}
+
+
+
+function getBuildInfo($type) {
+
+$file = file_get_contents('sys/sys.ser');
+$arrayUnserialized = unserialize($file);
+
+switch(strtolower($type)) {
+	case 'type':
+		return $arrayUnserialized[0];
+		break;
+	case 'tag':
+		return $arrayUnserialized[1];
+		break;
+	case 'ref':
+		return $arrayUnserialized[2];
+		break;
+	default:
+		return 'function called improperly';
+		break;
+}
+
+}
+
+
+
 function timeToAgo($time, $rcs = 0) {
 	$current_time = time();
 	$difference = $current_time - $time;
@@ -98,8 +159,8 @@ function getAudioPlayer($conn, $projectUuid, $projectFileUuid, $name, $filetype,
 
 function updateDescription($conn, $projectFileUuid, $newDesc) {
 
-$sql = 'UPDATE projectfiles SET description = "'.$newDesc.'" WHERE projectfiles.uuid = '.$projectFileUuid.';';
-mysqli_query($conn, $sql);
+	$sql = 'UPDATE projectfiles SET description = "'.$newDesc.'" WHERE projectfiles.uuid = '.$projectFileUuid.';';
+	mysqli_query($conn, $sql);
 
 }
 

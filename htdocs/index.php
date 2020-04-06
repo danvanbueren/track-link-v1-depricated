@@ -21,7 +21,7 @@
 						<li role="presentation"><a class="customlogout" href="logout.php" role="button"><i class="material-icons md-18">exit_to_app</i> Logout</a></li>
 					</ul>
 				</nav>
-				<h3 class="text-muted">Littleton Artist Portal</h3>
+				<h3 class="text-muted"><?php echo getUserConfig('group-name'); ?> Artist Portal</h3>
 			</div>
 			<div style="margin-bottom: 50px;">
 				<button style="float: right; margin-top: 15px;" class="btn btn-default btn-sm" type="button" data-toggle="modal" data-target="#add-new-modal">Add new</button>
