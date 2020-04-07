@@ -1,10 +1,8 @@
 <?php
 
-
 function getUserConfig($param) {
 
 	$file = file_get_contents('settings.config');
-
 	$someArray = json_decode($file);
 	  foreach ($someArray as $key => $value) {
 	  	switch($param) {
@@ -32,7 +30,7 @@ function getUserConfig($param) {
 	  			return false;
 	  			break;
 	  	}
-  }
+	}
 }
 
 
@@ -41,7 +39,6 @@ function getBuildInfo($type) {
 
 $file = file_get_contents('sys/sys.ser');
 $arrayUnserialized = unserialize($file);
-
 switch(strtolower($type)) {
 	case 'type':
 		return $arrayUnserialized[0];
@@ -62,6 +59,7 @@ switch(strtolower($type)) {
 
 
 function timeToAgo($time, $rcs = 0) {
+
 	$current_time = time();
 	$difference = $current_time - $time;
 	$units = array('second', 'minute', 'hour', 'day', 'week', 'month', 'year', 'decade');
@@ -77,11 +75,13 @@ function timeToAgo($time, $rcs = 0) {
 	if (($rcs == 1) && ($v >= 1) && (($current_time - $_time) > 0))
 		$x .= time_ago($_time);
 	return $x;
+
 }
 
 
 
 function userUuidToName($conn, $uuid) {
+
 	$r = mysqli_query($conn, 'SELECT name FROM users WHERE uuid = '.$uuid.';');
 	$rc = mysqli_num_rows($r);
 	if($rc > 0) {
@@ -92,11 +92,13 @@ function userUuidToName($conn, $uuid) {
 		$name = "lookup failed! ".$uuid;
 	}
 	return $name;
+
 }
 
 
 
 function getProjectFile($conn, $projectUuid, $data, $role) {
+
 	if (($data == 'uuid' || $data == 'filetype' || $data == 'all') && ($role == 'art' || $role == 'bounce' || $role == 'stem'))
 	{
 		if ($data == 'all') {
@@ -115,11 +117,13 @@ function getProjectFile($conn, $projectUuid, $data, $role) {
 		}
 	}
 	return '';
+
 }
 
 
 
 function getAudioPlayer($conn, $projectUuid, $projectFileUuid, $name, $filetype, $audio, $user, $date) {
+
 	$download_name = $name." - ".$date.".".$filetype;
 	$playerType = 'mpeg';
 	switch ($filetype) {
@@ -153,6 +157,7 @@ function getAudioPlayer($conn, $projectUuid, $projectFileUuid, $name, $filetype,
 			</div>
 		</div>
 	';
+
 }
 
 
@@ -167,6 +172,7 @@ function updateDescription($conn, $projectFileUuid, $newDesc) {
 
 
 function deleteProject($conn, $uuid) {
+
 	$sqlA = 'SELECT * FROM projectfiles WHERE projectfiles.proj_uuid = '.$uuid.';';
 	$resultA = mysqli_query($conn, $sqlA);
 	$resultACheck = mysqli_num_rows($resultA);
@@ -179,19 +185,23 @@ function deleteProject($conn, $uuid) {
 	}
 	$sql = 'DELETE FROM projects WHERE projects.uuid = '.$uuid.';';
 	$result = mysqli_query($conn, $sql);
+
 }
 
 
 
 function deleteProjectFile($conn, $project_file_uuid, $path_to_file) {
+
 	unlink($path_to_file);
 	$sql = 'DELETE FROM projectfiles WHERE projectfiles.uuid = '.$project_file_uuid.';';
 	mysqli_query($conn, $sql);
+
 }
 
 
 
 function stems($conn, $projectUuid) {
+
 	$sql = 'SELECT * FROM projectfiles WHERE proj_uuid = '.$projectUuid.' AND role = "stem" ORDER BY time_uploaded DESC;';
 	$x = mysqli_query($conn, $sql);
 	$xR = mysqli_num_rows($x);
@@ -208,11 +218,13 @@ function stems($conn, $projectUuid) {
 	} else {
 		echo "<i>none</i>";
 	}
+
 }
 
 
 
 function bounce($conn, $projectUuid) {
+
 	$sql = 'SELECT * FROM projectfiles WHERE proj_uuid = '.$projectUuid.' AND role = "bounce" ORDER BY time_uploaded DESC;';
 	$x = mysqli_query($conn, $sql);
 	$xR = mysqli_num_rows($x);
@@ -229,10 +241,12 @@ function bounce($conn, $projectUuid) {
 	} else {
 		echo "<i>none</i>";
 	}
+
 }
 
 
 function getAlert($type, $title, $description, $dismissible) {
+
 	$result = 'Function was called incorrectly';
 	$type = strtolower($type);
 	$allowed_types = array('primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark');
@@ -252,28 +266,28 @@ function getAlert($type, $title, $description, $dismissible) {
 		';
 	}
 	return $result;
+
 }
 
 
 
-function getAllAlerts($GETvarName) {
-	switch($GETvarName) {
-		case 'extension':
-			echo getAlert('danger', 'Danger', 'Upload error - <i>illegal extension exception</i>', true);
-			break;
-		case 'size':
-			echo getAlert('danger', 'Danger', 'Upload error - <i>illegal size exception</i>', true);
-			break;
-		case 'general':
-			echo getAlert('danger', 'Danger', 'Upload error - <i>general exception</i>', true);
-			break;
-		case 'notexist':
-			echo getAlert('danger', 'Alert', 'Project does not exist!', true);
-			break;
-		case 'projdel':
-			echo getAlert('info', 'Info', 'Project deleted', true);
-			break;
-	}
+function getAllAlerts($value) {
+
+if($value == 'extension')
+	echo getAlert('danger', 'Danger', 'Upload error - <i>illegal extension exception</i>', true);
+if($value == 'size')
+	echo getAlert('danger', 'Danger', 'Upload error - <i>illegal size exception</i>', true);
+if($value == 'general')
+	echo getAlert('danger', 'Danger', 'Upload error - <i>general exception</i>', true);
+if($value == 'notexist')
+	echo getAlert('danger', 'Alert', 'Project does not exist!', true);
+if($value == 'projdel')
+	echo getAlert('info', 'Info', 'Project deleted', true);
+if($value == 'changenamesuccess')
+	echo getAlert('info', 'Info', 'Username successfully changed', true);
+if($value == 'changepasssuccess')
+	echo getAlert('info', 'Info', 'Password successfully changed', true);
+
 }
 
 
@@ -282,37 +296,26 @@ function uploadArt($conn, $projUuid) {
 
 if (isset($_POST['submitart'])) {
 	$errorcatch = "project.php?uuid=".$projUuid."&";
-
 	$varTimestamp = date("Y-m-d H:i:s", time());
-
 	$file = $_FILES['file'];
-
 	$fileName = $_FILES['file']['name'];
 	$fileTmpName = $_FILES['file']['tmp_name'];
 	$fileSize = $_FILES['file']['size'];
 	$fileError = $_FILES['file']['error'];
 	$fileType = $_FILES['file']['type'];
-
 	$fileExt = explode('.', $fileName);
 	$fileActualExt = strtolower(end($fileExt));
-
 	$allowed = array('apng', 'bmp', 'gif', 'jpg', 'jpeg', 'jfif', 'pjpeg', 'pjp', 'png', 'svg');
-
 	$description = $_POST['description'];
-
 	if (in_array($fileActualExt, $allowed)) {
 		if ($fileError === 0) {
 			// 25MB upload limit on album art
 			if ($fileSize < 25000000) {
-
-
 				// check if art already exists
 				$sql = 'SELECT * FROM projectfiles WHERE projectfiles.proj_uuid = '.$projUuid.' AND role = "art";';
 				$result = mysqli_query($conn, $sql);
 				$numR = mysqli_num_rows($result);
-
 				$fileUuid = "file uuid was never set";
-
 				if ($numR > 0) {
 					while ($row = mysqli_fetch_assoc($result)) {
 						// art exists, delete the old one first
@@ -321,11 +324,9 @@ if (isset($_POST['submitart'])) {
 						$result3 = mysqli_query($conn, $sql);
 					}
 				}
-
 				// add new art into sql
 				$sql = 'INSERT INTO projectfiles (uuid, proj_uuid, user_uuid, role, description, filetype, time_uploaded) VALUES (NULL, "'.$projUuid.'", "'.$_SESSION['uuid'].'", "art", "'.$description.'", "'.$fileActualExt.'", "'.$varTimestamp.'");';
 				$result2 = mysqli_query($conn, $sql);
-
 				// name file from sql uuid, then save
 				$fileUuid = mysqli_insert_id($conn);
 				$fileNameNew = $fileUuid.".".$fileActualExt;
@@ -343,10 +344,10 @@ if (isset($_POST['submitart'])) {
 		echo "You cannot upload files of this type!".$fileExt."why";
 		$errorcatch = $errorcatch."uploaderror=extension&";
 	}
-
 	$errorcatch = substr($errorcatch, 0, -1);
 	header('location: '.$errorcatch);
 }
+
 }
 
 
@@ -355,36 +356,26 @@ function uploadBounce($conn, $projUuid) {
 
 if (isset($_POST['submitbounce'])) {
 	$errorcatch = "project.php?uuid=".$projUuid."&";
-
 	$varTimestamp = date("Y-m-d H:i:s", time());
-
 	$file = $_FILES['file'];
 	$fileError = $_FILES['file']['error'];
 	$fileName = $_FILES['file']['name'];
 	$fileTmpName = $_FILES['file']['tmp_name'];
 	$fileSize = $_FILES['file']['size'];
 	$fileType = $_FILES['file']['type'];
-
 	$fileExt = explode('.', $fileName);
 	$fileActualExt = strtolower(end($fileExt));
-
 	$allowed = array('mp3', 'wav', 'ogg');
-
 	$description = $_POST['description'];
-
 	if (in_array($fileActualExt, $allowed)) {
 		if ($fileError === 0) {
 			// file can be no larger than 256MB (php.ini post_max_size && upload_max_filesize setting)
 			if ($fileSize < 256000000) {
-
-
 				// check if bounce already exists
 				$sql = 'SELECT * FROM projectfiles WHERE projectfiles.proj_uuid = '.$projUuid.' AND role = "bounce";';
 				$result = mysqli_query($conn, $sql);
 				$numR = mysqli_num_rows($result);
-
 				$fileUuid = "file uuid was never set";
-
 				if ($numR > 0) {
 					while ($row = mysqli_fetch_assoc($result)) {
 						// bounce exists, delete the old one first
@@ -393,11 +384,9 @@ if (isset($_POST['submitbounce'])) {
 						$result3 = mysqli_query($conn, $sql);
 					}
 				}
-
 				// add new bounce into sql
 				$sql = 'INSERT INTO projectfiles (uuid, proj_uuid, user_uuid, role, description, filetype, time_uploaded) VALUES (NULL, "'.$projUuid.'", "'.$_SESSION['uuid'].'", "bounce", "'.$description.'", "'.$fileActualExt.'", "'.$varTimestamp.'");';
 				$result2 = mysqli_query($conn, $sql);
-
 				// name file from sql uuid, then save
 				$fileUuid = mysqli_insert_id($conn);
 				$fileNameNew = $fileUuid.".".$fileActualExt;
@@ -415,24 +404,23 @@ if (isset($_POST['submitbounce'])) {
 		echo "You cannot upload files of this type!".$fileExt."why";
 		$errorcatch = $errorcatch."uploaderror=extension&";
 	}
-
 	$errorcatch = substr($errorcatch, 0, -1);
 	header('location: '.$errorcatch);
 }
+
 }
 
 
 
 function updateLyrics($conn, $projUuid) {
+
 	if (isset($_POST['submitlyrics'])) {
-
 		$lyrics = $_POST['lyrics'];
-
 		$sql = 'UPDATE projects SET lyrics = "'.$lyrics.'" WHERE projects.uuid = '.$projUuid.';';
 		$result = mysqli_query($conn, $sql);
-
 		header('location: project.php?uuid='.$projUuid);
 	}
+
 }
 
 
@@ -443,23 +431,17 @@ if(isset($_POST['submitstems'])) {
 	$varTimestamp = date("Y-m-d H:i:s", time());
 	$allowed_types = array('mp3', 'wav', 'ogg');
 	$description_pre = $_POST['description'];
-
 	if(!empty(array_filter($_FILES['files']['name']))) {
 		foreach ($_FILES['files']['tmp_name'] as $key => $value) {
-
 			$file_tmpname = $_FILES['files']['tmp_name'][$key];
 			$file_name = $_FILES['files']['name'][$key];
 			$file_size = $_FILES['files']['size'][$key];
 			$file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
-
 			$description = $description_pre.' ('.$file_name.')';
-
 			if(in_array(strtolower($file_ext), $allowed_types)) {
 				if ($file_size < 256000000) {
-
 					$sql = 'INSERT INTO projectfiles (uuid, proj_uuid, user_uuid, role, description, filetype, time_uploaded) VALUES (NULL, "'.$projUuid.'", "'.$_SESSION['uuid'].'", "stem", "'.$description.'", "'.strtolower($file_ext).'", "'.$varTimestamp.'");';
 					$result = mysqli_query($conn, $sql);
-
 					// name file from sql uuid, then save
 					$filepath = 'user-databank/'.mysqli_insert_id($conn).'.'.$file_ext;
 					move_uploaded_file($file_tmpname, $filepath);
@@ -474,6 +456,81 @@ if(isset($_POST['submitstems'])) {
 
 
 
+function updateUsername($conn) {
+
+$sql = 'SELECT name FROM users';
+$result = mysqli_query($conn, $sql);
+$rows = mysqli_num_rows($result);
+if(isset($_POST['submit-username'])){
+	$userUuid = $_SESSION['uuid'];
+	$curName = $_SESSION['name'];
+	$newName = preg_replace("/[^A-Za-z ]/", '', $_POST['username']);
+	$newName = ucwords(strtolower(trim($newName)));
+	if($newName == '') {
+		echo '</br>Name cannot be empty!';
+	} else {
+		if($newName == $curName) {
+			echo '</br>Name did not change!';
+		} else {
+			$available = true;
+			if ($rows > 0) {
+				while ($row = mysqli_fetch_assoc($result)) {
+					if($newName == $row['name']) {
+						$available = false;
+					}
+				}
+			} else {
+				$available = false;
+			}
+			if($available) {
+				$sql = 'UPDATE users SET name = "'.$newName.'" WHERE users.uuid = '.$userUuid.';';
+				$result = mysqli_query($conn, $sql);
+				if($result) {
+					$_SESSION['name'] = $newName;
+					echo "</br>Username changed!";
+					header('location: settings.php?alert=changenamesuccess');
+				}
+			} else {
+				echo "</br>Name not available!";
+			}
+		}
+	}
+}
+
+}
 
 
 
+function updatePassword($conn) {
+
+$userUuid = $_SESSION['uuid'];
+$sql = 'SELECT hash FROM users WHERE users.uuid = "'.$userUuid.'";';
+$result = mysqli_query($conn, $sql);
+$rows = mysqli_num_rows($result);
+if($rows > 0) {
+	while($row = mysqli_fetch_assoc($result)) {
+		$hash = $row['hash'];
+	}
+}
+if(isset($_POST['submit-password'])){
+	$oldpass = trim($_POST['oldpass']);
+	$newpass = trim($_POST['newpass']);
+	$newpass2 = trim($_POST['newpass2']);
+	if(password_verify($oldpass, $hash)) {
+		if($newpass == $newpass2) {
+			$newHash = password_hash($newpass, PASSWORD_DEFAULT);
+			$sql = 'UPDATE users SET hash = "'.$newHash.'" WHERE users.uuid = '.$userUuid.';';
+			$result = mysqli_query($conn, $sql);
+			if($result) {
+				echo "</br>Password changed!";
+				header('location: settings.php?alert=changepasssuccess');
+			}
+		} else {
+			echo '</br>New passwords do not match!';
+		}
+	} else {
+		echo '</br>Current password is wrong!';
+	}
+}
+
+}

@@ -8,7 +8,6 @@ require_once 'includes/functions.inc.php';
     $result = mysqli_query($conn, $sql);
     $resultRows = mysqli_num_rows($result);
 
-
     if ($resultRows > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $uuid = $row['uuid'];

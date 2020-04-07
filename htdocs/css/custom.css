@@ -25,8 +25,8 @@
 	opacity:0.8;
 	filter: blur(3px);
 	-webkit-filter: blur(3px);
-	max-height: 250px;
-	min-height: 250px;
+	max-height: 400px;
+	min-height: 400px;
 }
 
 .x-card-img:hover {
@@ -42,9 +42,9 @@
 }
 
 .card-constrain {
-	max-height: 250px;
-	min-height: 250px;
-	margin-bottom: 25px;
+	max-height: 400px;
+	min-height: 400px;
+	margin: 15px 10px 30px 10px;
 }
 
 .card-constrain-lg {

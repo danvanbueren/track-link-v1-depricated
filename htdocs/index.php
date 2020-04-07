@@ -9,7 +9,7 @@
 		<title>TrackLink - Littleton</title>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container-lg">
 			<?php
 				echo getAlert('warning', 'Alert', 'You are viewing an alpha build of TrackLink! <h6>-> IE/Edge not supported</h6>', true);
 				echo getAllAlerts(htmlspecialchars($_GET['alert']));
@@ -17,8 +17,22 @@
 			<div class="header clearfix" style="margin-bottom: 5px;">
 				<nav>
 					<ul class="nav nav-pills pull-right">
-						<li role="presentation" class="active"><a href="">Projects</a></li>
-						<li role="presentation"><a class="customlogout" href="logout.php" role="button"><i class="material-icons md-18">exit_to_app</i> Logout</a></li>
+						<li role="presentation" class="active"><a href="index.php">Projects</a></li>
+						<li role="presentation">
+
+							<div class="dropdown">
+  								<button class="btn text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+									<i class="material-icons md-36" style="vertical-align: middle;">account_circle</i>
+  								</button>
+  								<div class="dropdown-menu">
+  									<span class="dropdown-header"><?php echo $_SESSION['name'] ?></span>
+  									<div class="dropdown-divider"></div>
+    								<a class="dropdown-item" href="settings.php"><i class="material-icons md-18 text-muted" style="vertical-align: middle;">settings</i> Settings</a>
+    								<a class="dropdown-item" href="logout.php"><i class="material-icons md-18 text-muted" style="vertical-align: middle;">exit_to_app</i> Logout</a>
+  								</div>
+							</div>
+
+						</li>
 					</ul>
 				</nav>
 				<h3 class="text-muted"><?php echo getUserConfig('group-name'); ?> Artist Portal</h3>
